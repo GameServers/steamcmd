@@ -1,0 +1,11 @@
+#!/bin/bash
+
+/scripts/InstallAppID
+
+if [ "$USE_SRCDS" = "true" ]; then
+	/scripts/run_srcds_server
+else
+        echo "Unknown Server Startup Usage"
+        exit 1
+fi
+
