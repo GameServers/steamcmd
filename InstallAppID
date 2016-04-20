@@ -11,7 +11,7 @@ if [ "x${APPDIR}" = "x" ]; then
 	echo "ERROR: Need to set APPDIR"
 	exit 1
 fi
-if [ "x${STEAMUSER} = "x" ]; then
+if [ "x${STEAMUSER}" = "x" ]; then
 	echo "ERROR: Need to set STEAMUSER"
 	exit 1
 fi
