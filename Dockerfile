@@ -8,7 +8,12 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update                      &&      \
     apt-get install -y                          \
         curl                                    \
-        lib32gcc1
+        lib32gcc1				\
+	lib32tinfo5				\
+	lib32tinfo5:i386			\
+	libncurses5				\
+	libncurses5:i386
+					
 
 RUN useradd                             \
         -d /home/steamsrv               \
