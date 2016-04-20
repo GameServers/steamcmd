@@ -3,14 +3,16 @@ FROM ubuntu:14.04
 MAINTAINER Jason Rivers <docker@jasonrivers.co.uk
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV STEAMUSER anonymous
 
 # Install dependencies
+RUN dpkg --add-architecture i386
 RUN apt-get update                      &&      \
+    apt-get upgrade -y                     &&      \
     apt-get install -y                          \
         curl                                    \
         lib32gcc1				\
 	lib32tinfo5				\
-	lib32tinfo5:i386			\
 	libncurses5				\
 	libncurses5:i386
 					
@@ -20,6 +22,9 @@ RUN useradd                             \
         -m                              \
         -s /bin/bash                    \
         steamsrv
+
+RUN mkdir -p /scripts
+ADD InstallAppID /scripts/InstallAppID
 
 USER steamsrv
 # Download and extract SteamCMD

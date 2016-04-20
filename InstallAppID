@@ -1,0 +1,22 @@
+#!/bin/bash
+
+HOMEDIR=/home/steamsrv
+STEAMCMD=/home/steamsrv/steamcmd/steamcmd.sh
+
+if [ "x${APPID}" = "x" ]; then
+	echo "ERROR: Need to set APPID"
+	exit 1
+fi
+if [ "x${APPDIR}" = "x" ]; then 
+	echo "ERROR: Need to set APPDIR"
+	exit 1
+fi
+if [ "x${STEAMUSER} = "x" ]; then
+	echo "ERROR: Need to set STEAMUSER"
+	exit 1
+fi
+
+cd ${HOMEDIR}
+
+${STEAMCMD} +login ${STEAMUSER} +force_install_dir ${APPDIR} +app_update ${APPID} validate +quit
+
