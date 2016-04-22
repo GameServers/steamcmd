@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 MAINTAINER Jason Rivers <docker@jasonrivers.co.uk
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV STEAMUSER anonymous
+ENV STEAM_USER anonymous
 
 # Install dependencies
 RUN dpkg --add-architecture i386

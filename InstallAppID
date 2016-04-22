@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 HOMEDIR=/home/steamsrv
 STEAMCMD=/home/steamsrv/steamcmd/steamcmd.sh
 
@@ -11,12 +13,15 @@ if [ "x${APPDIR}" = "x" ]; then
 	echo "ERROR: Need to set APPDIR"
 	exit 1
 fi
-if [ "x${STEAMUSER}" = "x" ]; then
-	echo "ERROR: Need to set STEAMUSER"
+if [ "x${STEAM_USER}" = "x" ]; then
+	echo "ERROR: Need to set STEAM_USER"
 	exit 1
+fi
+if ! [ "x${STEAMCMD_OPTS}" = "x" ]; then
+	STEAMCMD_OPTS="\"${STEAMCMD_OPTS}\""
 fi
 
 cd ${HOMEDIR}
 
-${STEAMCMD} +login ${STEAMUSER} +force_install_dir ${APPDIR} +app_update ${APPID} validate +quit
+${STEAMCMD} +login ${STEAM_USER} ${STEAM_PASSWORD} +force_install_dir ${APPDIR} +app_update ${APPID} ${STEAMCMD_OPTS} validate +quit
 

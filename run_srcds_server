@@ -4,14 +4,18 @@ cd ${APPDIR}
 
 SERVER_CONFIG_FILE=${APPDIR}/${APP_GAME_NAME}/cfg/server.cfg
 
-if [ -f /tmp/server.cfg ]; then
-  echo "Applying server configuration"
-  cp /tmp/server.cfg ${SERVER_CONFIG_FILE}
-  sed -i "s/^hostname.*/hostname \"$APP_SERVER_NAME\"/" ${SERVER_CONFIG_FILE}
-  sed -i "s/^sv_contact.*/sv_contact \"$APP_SERVER_CONTACT\"/" ${SERVER_CONFIG_FILE}
-  sed -i "s/^sv_region.*/sv_region \"$APP_SERVER_REGION\"/" ${SERVER_CONFIG_FILE}
-  sed -i "s/^rcon_password.*/rcon_password \"$APP_RCON_PASSWORD\"/" ${SERVER_CONFIG_FILE}
-  rm /tmp/server.cfg
+if ! [ -f ${APPDIR}/${APP_GAME_NAME}/cfg/server.cfg ]; then
+
+	if [ -f /tmp/server.cfg ]; then
+	  echo "Applying server configuration"
+	  cp /tmp/server.cfg ${SERVER_CONFIG_FILE}
+	  sed -i "s/^hostname.*/hostname \"${APP_SERVER_NAME}\"/" ${SERVER_CONFIG_FILE}
+	  sed -i "s/^sv_contact.*/sv_contact \"${APP_SERVER_CONTACT}\"/" ${SERVER_CONFIG_FILE}
+	  sed -i "s/^sv_region.*/sv_region \"${APP_SERVER_REGION}\"/" ${SERVER_CONFIG_FILE}
+	  sed -i "s/^rcon_password.*/rcon_password \"${APP_RCON_PASSWORD}\"/" ${SERVER_CONFIG_FILE}
+	  rm /tmp/server.cfg
+
+	fi
 fi
 
 if ! [ "x${APP_SERVER_TOKEN}" = "x" ]; then
@@ -20,8 +24,12 @@ if ! [ "x${APP_SERVER_TOKEN}" = "x" ]; then
 fi
 
 if [ "$USE_SRCDS" = "true" ]; then
-	echo "running: ./srcds_run -console -game ${APP_GAME_NAME} -nohltv ${STEAM_SERVER_TOKEN} +maxplayers ${APP_SERVER_MAXPLAYERS} +map ${APP_SERVER_MAP} -port ${APP_SERVER_PORT}"
-	./srcds_run -console -game ${APP_GAME_NAME} -nohltv ${STEAM_SERVER_TOKEN} +maxplayers ${APP_SERVER_MAXPLAYERS} +map ${APP_SERVER_MAP} -port ${APP_SERVER_PORT}
+	if ! [ "x${APP_GAME_NAME}" = "x" ]; then
+		APP_GAME_NAME="-game ${APP_GAME_NAME}"
+	fi
+
+	echo "running: ./srcds_run -console ${APP_GAME_NAME} -nohltv ${STEAM_SERVER_TOKEN} +maxplayers ${APP_SERVER_MAXPLAYERS} +map ${APP_SERVER_MAP} -port ${APP_SERVER_PORT}"
+	./srcds_run -console ${APP_GAME_NAME} -nohltv ${STEAM_SERVER_TOKEN} +maxplayers ${APP_SERVER_MAXPLAYERS} +map ${APP_SERVER_MAP} -port ${APP_SERVER_PORT}
 else
 	echo "Unknown Server Startup Usage"
 	exit 1
