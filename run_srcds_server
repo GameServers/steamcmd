@@ -29,7 +29,7 @@ if [ "$USE_SRCDS" = "true" ]; then
 	fi
 
 	echo "running: ./srcds_run -console ${APP_GAME_NAME} ${APP_SRCDS_FLAGS} -nohltv ${STEAM_SERVER_TOKEN} +maxplayers ${APP_SERVER_MAXPLAYERS} +map ${APP_SERVER_MAP} -port ${APP_SERVER_PORT}"
-	./srcds_run -console ${APP_GAME_NAME} -nohltv ${STEAM_SERVER_TOKEN} +maxplayers ${APP_SERVER_MAXPLAYERS} +map ${APP_SERVER_MAP} -port ${APP_SERVER_PORT}
+	./srcds_run -console ${APP_GAME_NAME} ${APP_SRCDS_FLAGS} -nohltv ${STEAM_SERVER_TOKEN} +maxplayers ${APP_SERVER_MAXPLAYERS} +map ${APP_SERVER_MAP} -port ${APP_SERVER_PORT}
 else
 	echo "Unknown Server Startup Usage"
 	exit 1
