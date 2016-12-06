@@ -32,7 +32,10 @@ USER steamsrv
 # Download and extract SteamCMD
 RUN mkdir -p /home/steamsrv/steamcmd            &&\
     cd /home/steamsrv/steamcmd                          &&\
-    curl -s http://media.steampowered.com/installer/steamcmd_linux.tar.gz | tar -vxz
+    curl -s http://media.steampowered.com/installer/steamcmd_linux.tar.gz | tar -vxz &&\
+    mkdir -p /home/steamsrv/.steam/sdk32		&&\
+    ln -s /home/steamsrv/steamcmd/linux32/steamclient.so /home/steamsrv/.steam/sdk32/steamclient.so
+	
 
 WORKDIR /home/steamsrv
 
