@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 
 MAINTAINER Jason Rivers <docker@jasonrivers.co.uk
 
@@ -14,7 +14,11 @@ RUN apt-get update                      &&      \
         lib32gcc1				\
 	lib32tinfo5				\
 	libncurses5				\
-	libncurses5:i386
+	libncurses5:i386			\
+	libc6:i386				\
+	libstdc++6:i386				\
+	lib32z1					\
+	libcurl3-gnutls:i386
 					
 
 RUN useradd                             \

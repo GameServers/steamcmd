@@ -13,7 +13,6 @@ if ! [ -f ${APPDIR}/${APP_GAME_NAME}/cfg/server.cfg ]; then
 	  sed -i "s/^sv_contact.*/sv_contact \"${APP_SERVER_CONTACT}\"/" ${SERVER_CONFIG_FILE}
 	  sed -i "s/^sv_region.*/sv_region \"${APP_SERVER_REGION}\"/" ${SERVER_CONFIG_FILE}
 	  sed -i "s/^rcon_password.*/rcon_password \"${APP_RCON_PASSWORD}\"/" ${SERVER_CONFIG_FILE}
-	  rm /tmp/server.cfg
 
 	fi
 fi
