@@ -23,5 +23,5 @@ fi
 
 cd ${HOMEDIR}
 
-${STEAMCMD} +login ${STEAM_USER} ${STEAM_PASSWORD} +force_install_dir ${APPDIR} +app_update ${APPID} ${STEAMCMD_OPTS} validate +quit
+${STEAMCMD} +force_install_dir ${APPDIR} +login ${STEAM_USER} ${STEAM_PASSWORD} +app_update ${APPID} ${STEAMCMD_OPTS} validate +quit
 
